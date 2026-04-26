@@ -79,10 +79,13 @@ var listCmd = &cobra.Command{
 			if t.IsDone() {
 				status = "[✓]"
 			}
-			if t.IsPending(){
-				status = "[-]"
+			if t.IsPending() {
+				status = "[...]"
 			}
-			if t.IsDone() && filter == "done" {
+			if t.IsDone() && filter == string(task.StatusDone) {
+				fmt.Printf("%s #%d %s\n", status, t.Id, t.Title)
+			}
+			if t.IsPending() && filter == string(task.StatusPending) {
 				fmt.Printf("%s #%d %s\n", status, t.Id, t.Title)
 			}
 			if filter == "" {
